@@ -1,7 +1,13 @@
 var buttons = [];
+
 $(document).ready(function () {
     getButtons();
     setup();
+    console.log(window.location.pathname);
+});
+
+$(document).on("click",".appDetails", function (event) {
+    
 });
 
 function getButtons() {

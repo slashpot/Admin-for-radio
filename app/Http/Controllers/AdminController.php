@@ -45,6 +45,10 @@ class AdminController extends Controller
 
     public function delete() 
     {
-        
+        $playlist = Playlist::find(request(['id'][0]));
+        $playlist->songs()->delete();
+        $playlist->delete();
+
+        return redirect('/admin');
     }
 }

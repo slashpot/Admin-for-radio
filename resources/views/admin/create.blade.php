@@ -2,7 +2,7 @@
 
 @section('board')
 
-<h1>Add song</h1>
+<h1>Create Playlist</h1>
 
 <form method="POST" action="/admin" >
   {{csrf_field()}}
@@ -74,6 +74,6 @@
 
 </form>
 
-<script src="/js/addList.js"></script>
+<script src="/js/admin/create.js"></script>
 
 @endsection

@@ -29,8 +29,15 @@
 
                 </table>
 
-                <!-- Indicates a dangerous or potentially negative action -->
-                <button type="button" class="btn btn-danger" id="{{$playlist->id}}">Delete</button>
+                <form method="POST" action="/admin">
+                    
+                    {{ method_field('DELETE') }}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                    <input type="hidden" name="id" class="form-control" value="{{$playlist->id}}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+
+                </form>
 
             </div>
         </div>
@@ -46,6 +53,6 @@
 
     </script>
 
-    <script src="js/overview.js"></script>
+    <script src="js/admin/index.js"></script>
 
 @endsection
