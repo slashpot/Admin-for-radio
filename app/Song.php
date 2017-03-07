@@ -3,27 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Song extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['name', 'album', 'artist', 'playlist_id'];
+    protected $fillable = ['name', 'album', 'artist','playlist_id'];
     
-    public static function addSongs($query, $list_id) 
+    public static function addSong($name, $album, $artist, $list_id)
     {
-        $names = $query['name'];
-        $albums = $query['album'];
-        $artists = $query['artist'];
-
-        for($i = 0; $i < count($names); $i++)
-        {
-            Song::create([
-                'name' => $names[$i],
-                'album' => $albums[$i],
-                'artist' => $artists[$i],
-                'playlist_id' => $list_id
-            ]);
-        }
+        Song::create([
+            'name' => $name,
+            'album' => $album,
+            'artist' => $artist,
+            'playlist_id' => $list_id
+        ]);
     }
-
 }

@@ -2,10 +2,14 @@
 
 @section('board')
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.2/jqueryiframe-transport.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.2/jquery.fileupload.min.js"></script>
+
 <h1>Create Playlist</h1>
 
-<form method="POST" action="/admin" >
-  {{csrf_field()}}
+<form method="POST" action="/admin" enctype="multipart/form-data">
+
+  <input id="token" type="hidden" name="_token" value="{{ csrf_token() }}">
 
   <hr>
   <div class="form-inline">
@@ -52,14 +56,14 @@
     <div class="form-group">
 
       <label for="cover">Cover</label>
-      <input type="file" id="cover" name="cover[]">
+      <input type="file" class="file" name="cover[]" multiple required>
 
     </div>
 
     <div class="form-group">
 
       <label for="audio">Audio</label>
-      <input type="file" id="audio" name="audio[]">
+      <input type="file" class="file" name="audio[]" multiple required>
 
     </div>
 

@@ -17,21 +17,21 @@ function appendInline() {
 }
 
 function setSongNumber() {
-    for (var i = 1; i <= songNumber; i++) 
-        select.append("<option value=" + i.toString() + ">" + i + "</option>"); 
+    for (var i = 1; i <= songNumber; i++)
+        select.append("<option value=" + i.toString() + ">" + i + "</option>");
 }
 
 function setInlineForm() {
     var selected = select.val();
     var result = selected - current;
 
-    if (result > 0) 
-        for (var i = 0; i < result; i++) 
+    if (result > 0)
+        for (var i = 0; i < result; i++)
             appendInline();
-        
-    else if (result < 0) 
-        for (var i = result; i < 0; i++) 
+
+    else if (result < 0)
+        for (var i = result; i < 0; i++)
             $("#form #inlineForm:last").remove();
-        
+
     current = selected;
 }

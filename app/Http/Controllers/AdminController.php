@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
+
 use App\Playlist;
 use App\Song;
 use Carbon\Carbon;
@@ -28,6 +32,8 @@ class AdminController extends Controller
             'name' => 'required',
             'album' => 'required',
             'artist' => 'required',
+            'cover' => 'required',
+            'audio' => 'required',
             'list_name' => 'required'
         ]);
 
@@ -35,10 +41,24 @@ class AdminController extends Controller
             'name' => request('list_name')
         ]);
 
-        Song::addSongs(
-            request(['name', 'album', 'artist']), 
-            $playlist->id
-        );
+        $names = request('name');
+        $albums = request('album');
+        $artists = request('artist');
+        $covers = Input::file('cover');
+        $audios = Input::file('audio');
+
+        for($i = 0; $i < count($names); $i++)
+        {
+            Storage::putFile($playlist->name, $covers[$i]);
+            Storage::putFile($playlist->name, $audios[$i]);
+
+            Song::addSong(
+                $names[$i],
+                $albums[$i],
+                $artists[$i],
+                $playlist->id
+            );
+        }
 
         return redirect('/admin');
     }
@@ -46,6 +66,7 @@ class AdminController extends Controller
     public function delete() 
     {
         $playlist = Playlist::find(request(['id'][0]));
+        Storage::deleteDirectory($playlist->name);
         $playlist->songs()->delete();
         $playlist->delete();
 
