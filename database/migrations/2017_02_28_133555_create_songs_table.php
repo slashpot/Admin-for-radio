@@ -18,6 +18,8 @@ class CreateSongsTable extends Migration
             $table->string('name');
             $table->string('album');
             $table->string('artist');
+            $table->text('cover_url');
+            $table->text('audio_url');
             $table->integer('playlist_id');
         });
     }

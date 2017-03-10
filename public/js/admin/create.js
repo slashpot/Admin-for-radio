@@ -2,7 +2,7 @@ var inlineForm = $("#inlineForm")
 var form = $("#form");
 var select = $("#inlineFormCustomSelect");
 
-var songNumber = 100;
+var songNumber = 20; 
 var current = 1;
 
 $(document).ready(function () {

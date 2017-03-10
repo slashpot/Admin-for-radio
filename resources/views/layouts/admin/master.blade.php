@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@include('layouts.admin.nav')
+
 @section('title')
     <title>Dashboard</title>
 @endsection

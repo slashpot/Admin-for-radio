@@ -11,6 +11,7 @@
 
                     <thead class=>
                         <tr>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Album</th>
                             <th>Artist</th>
@@ -18,8 +19,9 @@
                     </thead>
 
                     <tbody>
-                        @foreach($playlist->songs as $song)
+                        @foreach($playlist->songs as $key=>$song)
                             <tr>
+                                <td>{{$key + 1}}</td>
                                 <td>{{$song->name}}</td>
                                 <td>{{$song->album}}</td>
                                 <td>{{$song->artist}}</td>
@@ -29,7 +31,7 @@
 
                 </table>
 
-                <form method="POST" action="/admin">
+                <form method="POST" action="/admin"> 
                     
                     {{ method_field('DELETE') }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">

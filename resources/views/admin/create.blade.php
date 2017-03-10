@@ -2,9 +2,6 @@
 
 @section('board')
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.2/jqueryiframe-transport.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.2/jquery.fileupload.min.js"></script>
-
 <h1>Create Playlist</h1>
 
 <form method="POST" action="/admin" enctype="multipart/form-data">

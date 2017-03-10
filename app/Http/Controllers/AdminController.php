@@ -12,6 +12,11 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index() 
     {
         $playlists = Playlist::latest()
@@ -28,14 +33,7 @@ class AdminController extends Controller
 
     public function store()
     {
-        $this->validate(request(), [
-            'name' => 'required',
-            'album' => 'required',
-            'artist' => 'required',
-            'cover' => 'required',
-            'audio' => 'required',
-            'list_name' => 'required'
-        ]);
+        $s3 = Storage::disk('s3');
 
         $playlist = Playlist::create([
             'name' => request('list_name')
@@ -49,13 +47,22 @@ class AdminController extends Controller
 
         for($i = 0; $i < count($names); $i++)
         {
-            Storage::putFile($playlist->name, $covers[$i]);
-            Storage::putFile($playlist->name, $audios[$i]);
+            $directory = "public". "/". $playlist->name;
+            $cover_type = $covers[$i]->getClientOriginalExtension();
+            $audio_type = $audios[$i]->getClientOriginalExtension();
+
+            $s3->putFileAs($directory, $covers[$i], $names[$i]. ".". $cover_type);
+            $s3->putFileAs($directory, $audios[$i], $names[$i]. ".". $audio_type);
+
+            $cover_url = $s3->url($directory. "/". $names[$i]. ".". $cover_type);
+            $audio_url = $s3->url($directory. "/". $names[$i]. ".". $audio_type);
 
             Song::addSong(
                 $names[$i],
                 $albums[$i],
                 $artists[$i],
+                $cover_url,
+                $audio_url,
                 $playlist->id
             );
         }
@@ -65,8 +72,9 @@ class AdminController extends Controller
 
     public function delete() 
     {
-        $playlist = Playlist::find(request(['id'][0]));
-        Storage::deleteDirectory($playlist->name);
+        $playlist = Playlist::find(request('id'));
+        $s3 = Storage::disk('s3');
+        $s3->deleteDirectory("public". "/". $playlist->name);
         $playlist->songs()->delete();
         $playlist->delete();
 

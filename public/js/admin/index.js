@@ -13,7 +13,7 @@ $(document).on("click",".appDetails", function (event) {
 function getButtons() {
     for (var i = 0; i < ids.length; i++) {
         var current = '#' + ids[i];
-        var button = $(current);
+        var button = $(current); 
         buttons.push(button);
     }
 }

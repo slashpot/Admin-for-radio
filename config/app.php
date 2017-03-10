@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        'Dusterio\AwsWorker\Integrations\LaravelServiceProvider',
 
         /*
          * Application Service Providers...
