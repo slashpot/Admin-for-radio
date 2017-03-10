@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     public function store()
     {
-        $s3 = Storage::disk('s3');
+        $s3 = Storage::disk('local');
 
         $playlist = Playlist::create([
             'name' => request('list_name')
@@ -73,7 +73,7 @@ class AdminController extends Controller
     public function delete() 
     {
         $playlist = Playlist::find(request('id'));
-        $s3 = Storage::disk('s3');
+        $s3 = Storage::disk('local');
         $s3->deleteDirectory("public". "/". $playlist->name);
         $playlist->songs()->delete();
         $playlist->delete();
