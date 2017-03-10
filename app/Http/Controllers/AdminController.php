@@ -12,11 +12,6 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index() 
     {
         $playlists = Playlist::latest()
@@ -33,7 +28,7 @@ class AdminController extends Controller
 
     public function store()
     {
-        $storage = Storage::disk('google');
+        $storage = Storage::disk('local');
 
         $playlist = Playlist::create([
             'name' => request('list_name')
@@ -51,13 +46,11 @@ class AdminController extends Controller
             $cover_type = $covers[$i]->getClientOriginalExtension();
             $audio_type = $audios[$i]->getClientOriginalExtension();
 
-            //$storage->putFileAs($directory, $covers[$i], $names[$i]. ".". $cover_type);
-            //$storage->putFileAs($directory, $audios[$i], $names[$i]. ".". $audio_type);
-            $storage->put($names[$i]. ".". $cover_type, $covers[$i]);
-            $storage->put($names[$i]. ".". $audio_type, $audios[$i]);
+            $storage->putFileAs($directory, $covers[$i], $names[$i]. ".". $cover_type);
+            $storage->putFileAs($directory, $audios[$i], $names[$i]. ".". $audio_type);
 
-            $cover_url = $storage->url($names[$i]. ".". $cover_type);
-            $audio_url = $storage->url($names[$i]. ".". $audio_type);
+            $cover_url = $storage->url("public". "/". $playlist->name. "/" . $names[$i]. ".". $cover_type);
+            $audio_url = $storage->url("public". "/". $playlist->name. "/" . $names[$i]. ".". $audio_type);
 
             Song::addSong(
                 $names[$i],
@@ -75,6 +68,8 @@ class AdminController extends Controller
     public function delete() 
     {
         $playlist = Playlist::find(request('id'));
+        $storage = Storage::disk('local');
+        $storage->deleteDirectory("public". "/". $playlist->name);
         $playlist->songs()->delete();
         $playlist->delete();
 

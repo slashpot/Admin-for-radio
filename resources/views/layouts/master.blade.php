@@ -29,7 +29,7 @@
 
   <body>
     <div class="container-fluid">
-
+      @include('layouts.nav')
       <div class="row">
         @yield('content')
       </div>

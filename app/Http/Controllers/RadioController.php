@@ -9,11 +9,11 @@ class RadioController extends Controller
 {
     public function index() {
         $playlist = Playlist::all()->last();
-        $listname = $playlist->name;
-        $songs = $playlist->songs()->get();
+        $songs = [];
 
-        return view('radio.index', compact('songs', 'listname'));
+        if($playlist != null) 
+            $songs = $playlist->songs()->get();
+        
+        return view('radio.index', compact('songs'));
     }
-
-
 }
