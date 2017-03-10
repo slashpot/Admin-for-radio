@@ -9,7 +9,6 @@
         "aws/aws-sdk-php": "^3.24",
         "dusterio/laravel-aws-worker": "^0.1.9",
         "fideloper/proxy": "^3.2",
-        "heroku/heroku-buildpack-php": "^120.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
