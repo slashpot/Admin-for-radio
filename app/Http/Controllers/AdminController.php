@@ -51,8 +51,8 @@ class AdminController extends Controller
             $cover_type = $covers[$i]->getClientOriginalExtension();
             $audio_type = $audios[$i]->getClientOriginalExtension();
 
-            $s3->putFileAs($directory, $covers[$i], $names[$i]. ".". $cover_type);
-            $s3->putFileAs($directory, $audios[$i], $names[$i]. ".". $audio_type);
+            $storage->putFileAs($directory, $covers[$i], $names[$i]. ".". $cover_type);
+            $storage->putFileAs($directory, $audios[$i], $names[$i]. ".". $audio_type);
 
             $cover_url = $storage->url($directory. "/". $names[$i]. ".". $cover_type);
             $audio_url = $storage->url($directory. "/". $names[$i]. ".". $audio_type);
