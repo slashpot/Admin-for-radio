@@ -2,7 +2,7 @@
 
 
 ## Introduction
-Developing an admin dashboard for radio. Admin can view added playlists and create playlist with mutiple songs.
+Developing an admin dashboard for radio using Laravel. Admin can view added playlists and create playlist with mutiple songs.
 Radio page would load the latest playlist in player and allowed to play, change and display information of songs.
 
 ## Screenshot
