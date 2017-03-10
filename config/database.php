@@ -111,7 +111,7 @@ return [
 
     'redis' => [
 
-        'cluster' => env('REDIS_CLUSTER', false),
+        'cluster' => 'predis',
 
         'default' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
