@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     public function store()
     {
-        $s3 = Storage::disk('local');
+        $storage = Storage::disk('google');
 
         $playlist = Playlist::create([
             'name' => request('list_name')
@@ -54,8 +54,8 @@ class AdminController extends Controller
             $s3->putFileAs($directory, $covers[$i], $names[$i]. ".". $cover_type);
             $s3->putFileAs($directory, $audios[$i], $names[$i]. ".". $audio_type);
 
-            $cover_url = $s3->url($directory. "/". $names[$i]. ".". $cover_type);
-            $audio_url = $s3->url($directory. "/". $names[$i]. ".". $audio_type);
+            $cover_url = $storage->url($directory. "/". $names[$i]. ".". $cover_type);
+            $audio_url = $storage->url($directory. "/". $names[$i]. ".". $audio_type);
 
             Song::addSong(
                 $names[$i],
@@ -73,8 +73,8 @@ class AdminController extends Controller
     public function delete() 
     {
         $playlist = Playlist::find(request('id'));
-        $s3 = Storage::disk('local');
-        $s3->deleteDirectory("public". "/". $playlist->name);
+        $storage = Storage::disk('local');
+        $storage->deleteDirectory("public". "/". $playlist->name);
         $playlist->songs()->delete();
         $playlist->delete();
 
