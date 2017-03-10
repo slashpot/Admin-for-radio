@@ -9,4 +9,4 @@ Route::get('/admin/create', 'AdminController@create');
  
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
