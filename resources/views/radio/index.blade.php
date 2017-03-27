@@ -9,9 +9,9 @@
     <meta name="author" content="">
 
     <title>vaporadio</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   
-
-
     <link rel='stylesheet' href='css/vapor/vaporwave.css'>
     <link rel='stylesheet' href='css/vapor/win98.css'>
     <link rel='stylesheet' href='css/vapor/vapor.css'>
