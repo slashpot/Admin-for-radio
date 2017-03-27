@@ -1,14 +1,23 @@
-@extends('layouts.master')
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-@section('title')
-    <title>Radio</title>
-@endsection
+    <title>vaporadio</title>
+  
 
-@section('content')
+
     <link rel='stylesheet' href='css/vapor/vaporwave.css'>
     <link rel='stylesheet' href='css/vapor/win98.css'>
     <link rel='stylesheet' href='css/vapor/vapor.css'>
+  </head>
 
+  <body>
     <div class='vaporwave palm-trees example'>
      <div class='resizable window center-it'>
       <div class='header'>
@@ -68,5 +77,4 @@
   </script> 
 
   <script type="text/javascript" src='js/radio/index.js'></script>
-  
-@endsection
+</body>
