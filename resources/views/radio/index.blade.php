@@ -15,8 +15,8 @@
         <img class='icon' src='css/vapor/icons/exe.gif'/> 音楽プレーヤー.exe
       </div>
       <div class='content'>
-        <audio id="audio" preload="auto" >
-          <source id="source" >
+        <audio id="audio" preload="auto">
+          <source id="source" type="audio/mpeg" >
         </audio>
         <h3 id='title'></h3>
         <p id='artist'></p>
@@ -64,7 +64,7 @@
 
         songs.push(current);
     @endforeach
-    
+
   </script> 
 
   <script type="text/javascript" src='js/radio/index.js'></script>

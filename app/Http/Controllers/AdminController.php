@@ -18,7 +18,7 @@ class AdminController extends Controller
                     ->filter(request(['month', 'year']))
                     ->get();
 
-        return view('admin.index', compact('playlists'));
+        return view('admin.index', compact('playlists')); 
     }
 
     public function create() 
@@ -28,8 +28,6 @@ class AdminController extends Controller
 
     public function store()
     {
-        $storage = Storage::disk('local');
-
         $playlist = Playlist::create([
             'name' => request('list_name')
         ]);
@@ -37,27 +35,17 @@ class AdminController extends Controller
         $names = request('name');
         $albums = request('album');
         $artists = request('artist');
-        $covers = Input::file('cover');
-        $audios = Input::file('audio');
+        $covers = request('cover');
+        $audios = request('audio');
 
         for($i = 0; $i < count($names); $i++)
         {
-            $directory = "public". "/". $playlist->name;
-            $cover_type = $covers[$i]->getClientOriginalExtension();
-            $audio_type = $audios[$i]->getClientOriginalExtension();
-
-            $storage->putFileAs($directory, $covers[$i], $names[$i]. ".". $cover_type);
-            $storage->putFileAs($directory, $audios[$i], $names[$i]. ".". $audio_type);
-
-            $cover_url = $storage->url("public". "/". $playlist->name. "/" . $names[$i]. ".". $cover_type);
-            $audio_url = $storage->url("public". "/". $playlist->name. "/" . $names[$i]. ".". $audio_type);
-
             Song::addSong(
                 $names[$i],
                 $albums[$i],
                 $artists[$i],
-                $cover_url,
-                $audio_url,
+                $covers[$i],
+                $audios[$i],
                 $playlist->id
             );
         }
@@ -68,8 +56,6 @@ class AdminController extends Controller
     public function delete() 
     {
         $playlist = Playlist::find(request('id'));
-        $storage = Storage::disk('local');
-        $storage->deleteDirectory("public". "/". $playlist->name);
         $playlist->songs()->delete();
         $playlist->delete();
 

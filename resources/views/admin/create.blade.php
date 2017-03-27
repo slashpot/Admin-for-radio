@@ -53,14 +53,14 @@
     <div class="form-group">
 
       <label for="cover">Cover</label>
-      <input type="file" class="file" name="cover[]" multiple required>
+      <input type="text" class="form-control" name="cover[]" required>
 
     </div>
 
     <div class="form-group">
 
       <label for="audio">Audio</label>
-      <input type="file" class="file" name="audio[]" multiple required>
+      <input type="text" class="form-control" name="audio[]" required>
 
     </div>
 

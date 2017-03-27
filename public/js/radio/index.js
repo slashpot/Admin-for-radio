@@ -7,6 +7,7 @@ var current = 0;
 var isplayed = false;
 
 function main(){
+	audio.load();
 	SetupSong();
 }
 $(document).ready(main);
