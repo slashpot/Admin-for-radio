@@ -17,7 +17,7 @@ class Playlist extends Model
 
     public static function archive()
     {
-        return Playlist::selectRaw('year(created_at) as year, monthname(created_at) as month, count(*) as count')
+        return Playlist::selectRaw('extract(year from created_at) as year, extract(month from created_at) as month, count(*) as count')
                         ->groupBy('year', 'month')
                         ->orderByRaw('min(created_at) desc')
                         ->get()
